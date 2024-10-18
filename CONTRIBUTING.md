@@ -12,7 +12,20 @@ Table of Contents
 
 ## Orientation
 
-We have lots more helpful information for users and developers on the [Mixxx wiki](https://mixxx.org/wiki/doku.php/start), including [build instructions](https://mixxx.org/wiki/doku.php/start#compile_mixxx_from_source_code).
+We have lots more helpf# installs fnm (Fast Node Manager)
+winget install Schniz.fnm
+
+# configure fnm environment
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
+# download and install Node.js
+fnm use --install-if-missing 20
+
+# verifies the right Node.js version is in the environment
+node -v # should print `v20.18.0`
+
+# verifies the right npm version is in the environment
+npm -v # should print `10.8.2`ul information for users and developers on the [Mixxx wiki](https://mixxx.org/wiki/doku.php/start), including [build instructions](https://mixxx.org/wiki/doku.php/start#compile_mixxx_from_source_code).
 
 ### Git Repositories
 

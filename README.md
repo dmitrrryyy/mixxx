@@ -1,11 +1,11 @@
 # Mixxx
 
-[![GitHub latest tag](https://img.shields.io/github/tag/mixxxdj/mixxx.svg)](https://mixxx.org/download)
-[![Packaging status](https://repology.org/badge/tiny-repos/mixxx.svg)](https://repology.org/metapackage/mixxx/versions)
-[![Build status](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml/badge.svg)](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml)
-[![Coverage status](https://coveralls.io/repos/github/mixxxdj/mixxx/badge.svg)](https://coveralls.io/github/mixxxdj/mixxx)
+[<img alt="GitHub latest tag" src="https://img.shields.io/github/tag/mixxxdj/mixxx.svg"/>](https://mixxx.org/download)
+[<img alt="Packaging status" src="https://repology.org/badge/tiny-repos/mixxx.svg"/>](https://repology.org/metapackage/mixxx/versions)
+[<img alt="Build status" src="https://github.com/mixxxdj/mixxx/actions/workflows/build.yml/badge.svg"/>](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml)
+[<img alt="Coverage status" src="https://coveralls.io/repos/github/mixxxdj/mixxx/badge.svg"/>](https://coveralls.io/github/mixxxdj/mixxx)
 [![Zulip chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://mixxx.zulipchat.com)
-[![Donate](https://img.shields.io/opencollective/all/mixxx?label=Donate)](https://mixxx.org/donate)
+[<img alt="Donate" height="1028" src="https://img.shields.io/opencollective/all/mixxx?label=Donate" title="рр" width="1924"/>](https://mixxx.org/donate)
 
 [Mixxx] is Free DJ software that gives you everything you need to perform live
 DJ mixes. Mixxx works on GNU/Linux, Windows, and macOS.
@@ -48,19 +48,27 @@ corresponding command for your operating system:
 | Fedora | `tools/rpm_buildenv.sh setup` |
 | Other Linux distros | See the [wiki article](https://github.com/mixxxdj/mixxx/wiki/Compiling%20on%20Linux) |
 
-To build Mixxx, run
+    setup)
+        source /etc/lsb-release 2>/dev/null
+        case "${DISTRIB_CODENAME}" in
+            bionic) # Ubuntu 18.04 LTS
+                PACKAGES_EXTRA=(
+                    libmp4v2-dev
+                )
+                ;;
+            *) # libmp4v2 was removed from Debian 10 & Ubuntu 20.04 due to lack of maintenance, so use FFMPEG instead
+                PACKAGES_EXTRA=(
+                    libavformat-dev
+                )
+        esac
 
-    $ mkdir build
-    $ cd build
-    $ cmake ..
-    $ cmake --build .
+        sudo apt-get update
 
 There should now be a `mixxx` executable in the current directory that you can
 run. Alternatively, can generate a package using `cpack`.
 
 ## Documentation
-
-For help using Mixxx, there are a variety of options:
+        # This avoids a package deadlock, resulting in jackd2 being removed, and jackd1 being installed,
 
 - [Mixxx manual][manual]
 - [Mixxx wiki][wiki]
@@ -70,45 +78,90 @@ For help using Mixxx, there are a variety of options:
 ## Translation
 
 Help to spread Mixxx with translations into more languages, as well as to update and ensure the accuracy of existing translations.
-
-- [Help translate content]
-- [Mixxx i18n wiki]
-- [Mixxx localization forum]
-- [Mixxx glossary]
+        # jackd dev library, so let's give it one..
+        if [ "$(dpkg-query -W -f='${Status}' jackd2 2>/dev/null | grep -c "ok installed")" -eq 1 ];
+        then
+            sudo apt-get install libjack-jackd2-dev;
+        fi
 
 ## Community
 
-Mixxx is a vibrant community of hackers, DJs and artists. To keep track of
-development and community news:
-
-- Chat with us on [Zulip][zulip].
-- Follow us on [Mastodon], [Twitter] and [Facebook].
-- Subscribe to the [Mixxx Blog][blog].
-- Post on the [Mixxx forums][discourse].
-
-## License
-
-Mixxx is released under the GPLv2. See the LICENSE file for a full copy of the
-license.
-
-[mixxx]: https://mixxx.org
-[download-stable]: https://mixxx.org/download/#stable
-[download-testing]: https://mixxx.org/download/#testing
-[issues]: https://github.com/mixxxdj/mixxx/issues
-[fileabug]: https://github.com/mixxxdj/mixxx/issues/new/choose
-[mastodon]: https://floss.social/@mixxx
-[twitter]: https://twitter.com/mixxxdj
-[facebook]: https://www.facebook.com/pages/Mixxx-DJ-Software/21723485212
-[blog]: https://mixxx.org/news/
-[manual]: https://manual.mixxx.org/
-[wiki]: https://github.com/mixxxdj/mixxx/wiki
-[visualstudio2019]: https://docs.microsoft.com/visualstudio/install/install-visual-studio?view=vs-2019
-[easybugs]: https://github.com/mixxxdj/mixxx/issues?q=is%3Aopen+is%3Aissue+label%3Aeasy
-[creating skins]: https://mixxx.org/wiki/doku.php/Creating-Skins
-[help translate content]: https://www.transifex.com/projects/p/mixxxdj
-[Mixxx i18n wiki]: https://github.com/mixxxdj/mixxx/wiki/Internationalization
-[Mixxx localization forum]: https://mixxx.discourse.group/c/translation/13
-[Mixxx glossary]: https://www.transifex.com/projects/p/mixxxdj/glossary/l/en/
-[hardware compatibility]: https://manual.mixxx.org/2.3/en/hardware/manuals.html
-[zulip]: https://mixxx.zulipchat.com/
-[discourse]: https://mixxx.discourse.group/
+        sudo apt-get install -y --no-install-recommends -- \
+            ccache \
+            cmake \
+            clazy \
+            clang-tidy \
+            debhelper \
+            devscripts \
+            docbook-to-man \
+            dput \
+            fonts-open-sans \
+            fonts-ubuntu \
+            g++ \
+            lcov \
+            libbenchmark-dev \
+            libchromaprint-dev \
+            libdistro-info-perl \
+            libebur128-dev \
+            libfaad-dev \
+            libfftw3-dev \
+            libflac-dev \
+            libgmock-dev \
+            libgtest-dev \
+            libgl1-mesa-dev \
+            libhidapi-dev \
+            libid3tag0-dev \
+            liblilv-dev \
+            libmad0-dev \
+            libmodplug-dev \
+            libmp3lame-dev \
+            libmsgsl-dev \
+            libopus-dev \
+            libopusfile-dev \
+            libportmidi-dev \
+            libprotobuf-dev \
+            libqt6core5compat6-dev\
+            libqt6shadertools6-dev \
+            libqt6opengl6-dev \
+            libqt6shadertools6-dev \
+            libqt6sql6-sqlite \
+            libqt6svg6-dev \
+            librubberband-dev \
+            libshout-idjc-dev \
+            libsndfile1-dev \
+            libsoundtouch-dev \
+            libsqlite3-dev \
+            libssl-dev \
+            libtag1-dev \
+            libudev-dev \
+            libupower-glib-dev \
+            libusb-1.0-0-dev \
+            libwavpack-dev \
+            lv2-dev \
+            markdown \
+            portaudio19-dev \
+            protobuf-compiler \
+            qtkeychain-qt6-dev \
+            qt6-declarative-private-dev \
+            qt6-base-private-dev \
+            qt6-qpa-plugins \
+            qml6-module-qt5compat-graphicaleffects \
+            qml6-module-qtqml-workerscript \
+            qml6-module-qtquick-controls \
+            qml6-module-qtquick-layouts \
+            qml6-module-qtquick-nativestyle \
+            qml6-module-qtquick-shapes \
+            qml6-module-qtquick-templates \
+            qml6-module-qtquick-window \
+            qml6-module-qt-labs-qmlmodels \
+            "${PACKAGES_EXTRA[@]}"
+        ;;
+    *)
+        echo "Usage: $0 [options]"
+        echo ""
+        echo "options:"
+        echo "   help       Displays this help."
+        echo "   name       Displays the name of the required build environment."
+        echo "   setup      Installs the build environment."
+        ;;
+esac

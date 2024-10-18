@@ -1,13 +1,52 @@
-#!/bin/bash
-# This script works with Debian, Ubuntu, and derivatives.
-# shellcheck disable=SC1091
-set -o pipefail
+# Mixxx
 
-case "$1" in
-    name)
-        echo "No build environment name required for Debian based distros." >&2
-        echo "This script installs the build dependencies via apt using the \"setup\" option." >&2
-        ;;
+[![GitHub latest tag](https://img.shields.io/github/tag/mixxxdj/mixxx.svg)](https://mixxx.org/download)
+[![Packaging status](https://repology.org/badge/tiny-repos/mixxx.svg)](https://repology.org/metapackage/mixxx/versions)
+[![Build status](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml/badge.svg)](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml)
+[![Coverage status](https://coveralls.io/repos/github/mixxxdj/mixxx/badge.svg)](https://coveralls.io/github/mixxxdj/mixxx)
+[![Zulip chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://mixxx.zulipchat.com)
+[![Donate](https://img.shields.io/opencollective/all/mixxx?label=Donate)](https://mixxx.org/donate)
+
+[Mixxx] is Free DJ software that gives you everything you need to perform live
+DJ mixes. Mixxx works on GNU/Linux, Windows, and macOS.
+
+## Quick Start
+
+To get started with Mixxx:
+
+1. For live use, [download the latest stable version][download-stable].
+2. For experimentation and testing, [download a development release][download-testing].
+3. To live on the bleeding edge, clone the repo: `git clone https://github.com/mixxxdj/mixxx.git`
+
+## Bug tracker
+
+The Mixxx team uses [Github Issues][issues] to manage Mixxx development.
+
+Have a bug or feature request? [File a bug on Github][fileabug].
+
+Want to get involved in Mixxx development? Assign yourself a bug from the [easy
+bug list][easybugs] and get started!
+Read [CONTRIBUTING](CONTRIBUTING.md) for more information.
+
+## Building Mixxx
+
+First, open a terminal (on Windows, use "x64 Native Tools Command Prompt for
+[VS 2019][visualstudio2019]"), download the mixxx
+source code and navigate to it:
+
+    $ git clone https://github.com/mixxxdj/mixxx.git
+    $ cd mixxx
+
+Fetch the required dependencies and set up the build environment by running the
+corresponding command for your operating system:
+
+| OS | Command |
+| -- | ------- |
+| Windows | `tools\windows_buildenv.bat` |
+| macOS | `source tools/macos_buildenv.sh setup` |
+| Debian/Ubuntu | `tools/debian_buildenv.sh setup` |
+| Fedora | `tools/rpm_buildenv.sh setup` |
+| Other Linux distros | See the [wiki article](https://github.com/mixxxdj/mixxx/wiki/Compiling%20on%20Linux) |
 
     setup)
         source /etc/lsb-release 2>/dev/null
@@ -25,25 +64,27 @@ case "$1" in
 
         sudo apt-get update
 
-        # If jackd2 is installed as per dpkg database, install libjack-jackd2-dev.
+There should now be a `mixxx` executable in the current directory that you can
+run. Alternatively, can generate a package using `cpack`.
+
+## Documentation
         # This avoids a package deadlock, resulting in jackd2 being removed, and jackd1 being installed,
-        # to satisfy portaudio19-dev's need for a jackd dev package. In short, portaudio19-dev needs a
+
+- [Mixxx manual][manual]
+- [Mixxx wiki][wiki]
+- [Hardware Compatibility]
+- [Creating Skins]
+
+## Translation
+
+Help to spread Mixxx with translations into more languages, as well as to update and ensure the accuracy of existing translations.
         # jackd dev library, so let's give it one..
         if [ "$(dpkg-query -W -f='${Status}' jackd2 2>/dev/null | grep -c "ok installed")" -eq 1 ];
         then
             sudo apt-get install libjack-jackd2-dev;
         fi
 
-        # Install a faster linker. Prefer mold, fall back to lld
-        if apt-cache show mold 2>%1 >/dev/null;
-        then
-            sudo apt-get install -y --no-install-recommends mold
-        else
-            if apt-cache show lld 2>%1 >/dev/null;
-            then
-                sudo apt-get install -y --no-install-recommends lld
-            fi
-        fi
+## Community
 
         sudo apt-get install -y --no-install-recommends -- \
             ccache \

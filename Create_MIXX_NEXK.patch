@@ -1,0 +1,13 @@
+Subject: [PATCH] Create MIXX NEXK
+---
+Index: MIXX NEXK
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MIXX NEXK b/MIXX NEXK
+new file mode 100644
+--- /dev/null	(revision 49011db30af6897e2bd748f693cd55c7e82cef4e)
++++ b/MIXX NEXK	(revision 49011db30af6897e2bd748f693cd55c7e82cef4e)
+@@ -0,0 +1,1 @@
++
