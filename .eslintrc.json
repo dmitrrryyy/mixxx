@@ -4,7 +4,45 @@
                "plugin:diff/diff"],
 
   "parser": "@typescript-eslint/parser",
-  "parserOptions": {
+  "parserOptions": {{
+    "macos-macosarm": {
+      "build_log_url": "https://github.com/mixxxdj/mixxx/actions/runs/11400406519",
+      "file_date": "2024-10-18T09:13:55.454716",
+      "file_sha256": "52adac1192203add4df3f3e19d7cfaace4f23a1c3e67662f209e6fa52c3b2261",
+      "file_sha256_url": "https://downloads.mixxx.org/snapshots/main/mixxx-2.6-alpha-115-ga716202b0b-macosarm.dmg.sha256sum",
+      "file_size": 66400850,
+      "file_url": "https://downloads.mixxx.org/snapshots/main/mixxx-2.6-alpha-115-ga716202b0b-macosarm.dmg",
+      "git_branch": "main",
+      "git_commit": "a716202b0b5bd6923d4d4438d62dba5060a19791",
+      "git_commit_url": "https://github.com/mixxxdj/mixxx/commit/a716202b0b5bd6923d4d4438d62dba5060a19791",
+      "git_describe": "2.6-alpha-115-ga716202b0b"
+    },
+    "macos-macosintel": {
+      "build_log_url": "https://github.com/mixxxdj/mixxx/actions/runs/11400406519",
+      "file_date": "2024-10-18T08:55:29.993707",
+      "file_sha256": "38d401f185025157410a5de166981899600129e1d0edeac165a656ade1bdf375",
+      "file_sha256_url": "https://downloads.mixxx.org/snapshots/main/mixxx-2.6-alpha-115-ga716202b0b-macosintel.dmg.sha256sum",
+      "file_size": 63407146,
+      "file_url": "https://downloads.mixxx.org/snapshots/main/mixxx-2.6-alpha-115-ga716202b0b-macosintel.dmg",
+      "git_branch": "main",
+      "git_commit": "a716202b0b5bd6923d4d4438d62dba5060a19791",
+      "git_commit_url": "https://github.com/mixxxdj/mixxx/commit/a716202b0b5bd6923d4d4438d62dba5060a19791",
+      "git_describe": "2.6-alpha-115-ga716202b0b"
+    },
+    "windows-win64": {
+      "build_log_url": "https://github.com/mixxxdj/mixxx/actions/runs/11400406519",
+      "file_date": "2024-10-18T08:59:59.176052",
+      "file_sha256": "cb068c2f80fbeefcac29bcd5c48f5c457641947108131d667997441bd38c1627",
+      "file_sha256_url": "https://downloads.mixxx.org/snapshots/main/mixxx-2.6-alpha-115-ga716202b0b-win64.msi.sha256sum",
+      "file_size": 88162304,
+      "file_url": "https://downloads.mixxx.org/snapshots/main/mixxx-2.6-alpha-115-ga716202b0b-win64.msi",
+      "git_branch": "main",
+      "git_commit": "a716202b0b5bd6923d4d4438d62dba5060a19791",
+      "git_commit_url": "https://github.com/mixxxdj/mixxx/commit/a716202b0b5bd6923d4d4438d62dba5060a19791",
+      "git_describe": "2.6-alpha-115-ga716202b0b"
+    }
+  }
+  
     "ecmaVersion": 7,
     "sourceType": "script"
   },
